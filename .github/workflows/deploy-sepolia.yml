@@ -1,4 +1,4 @@
-name: Canary Wallet Deployment
+name: Deployment
 
 on:
   push:

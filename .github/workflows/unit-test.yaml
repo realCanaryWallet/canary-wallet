@@ -1,4 +1,4 @@
-name: Canary Wallet Test
+name: Unit Test
 
 on:
   push:
