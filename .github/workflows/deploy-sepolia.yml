@@ -10,6 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
 
+    env:
+      SEPOLIA_RPC_URL: ${{ secrets.SEPOLIA_RPC_URL }}
+      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      OWNER: ${{ secrets.OWNER }}
+      ESCAPE_TO: ${{ secrets.ESCAPE_TO }}
+
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v3
@@ -25,12 +31,5 @@ jobs:
       - name: 🔧 Compile contracts
         run: npx hardhat compile
 
-      - name: 🔑 Set up ENV variables
-        run: |
-          echo "SEPOLIA_RPC_URL=${{ secrets.SEPOLIA_RPC_URL }}" >> .env
-          echo "PRIVATE_KEY=${{ secrets.PRIVATE_KEY }}" >> .env
-          echo "OWNER=${{ secrets.OWNER }}" >> .env
-          echo "ESCAPE_TO=${{ secrets.ESCAPE_TO }}" >> .env
-
       - name: 🚀 Deploy Canary & EscapeWallet
-        run: npx hardhat run scripts/deployCanaryAndEscape.js --network sepolia
+        run: npx hardhat run scripts/deploy.ts --network sepolia
