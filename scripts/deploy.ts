@@ -1,37 +1,31 @@
-import { ethers } from "hardhat";
 require("dotenv").config();
+const hre = require("hardhat");
 
 async function main() {
-  const { OWNER, ESCAPE_TO, CANARY } = process.env;
+  const [deployer] = await hre.ethers.getSigners();
 
-  if (!OWNER || !ESCAPE_TO || !CANARY) {
-    throw new Error("Missing OWNER, ESCAPE_TO, or CANARY in .env");
-  }
+  console.log("👤 Deployer:", deployer.address);
 
-  console.log("🚀 Deploying from:", OWNER);
-
-  // CanarySignal
-  const CanarySignal = await ethers.getContractFactory("CanarySignal");
+  const CanarySignal = await hre.ethers.getContractFactory("CanarySignal");
   const canary = await CanarySignal.deploy(
-    ethers.parseEther("0.1"),
-    ethers.parseUnits("10", 18),
-    OWNER
+    hre.ethers.parseEther("0.1"),
+    hre.ethers.parseUnits("10", 18),
+    process.env.OWNER
   );
   await canary.waitForDeployment();
-  console.log("✅ CanarySignal deployed to:", await canary.getAddress());
+  console.log("✅ CanarySignal deployed to:", canary.target);
 
-  // EscapeWallet
-  const EscapeWallet = await ethers.getContractFactory("EscapeWallet");
-  const escapeWallet = await EscapeWallet.deploy(
-    OWNER,                      // owner
-    ESCAPE_TO,                  // escapeTo
-    await canary.getAddress()   // canary
+  const EscapeWallet = await hre.ethers.getContractFactory("EscapeWallet");
+  const wallet = await EscapeWallet.deploy(
+    process.env.OWNER,
+    process.env.ESCAPE_TO,
+    canary.target
   );
-  await escapeWallet.waitForDeployment();
-  console.log("✅ EscapeWallet deployed to:", await escapeWallet.getAddress());
+  await wallet.waitForDeployment();
+  console.log("✅ EscapeWallet deployed to:", wallet.target);
 }
 
 main().catch((err) => {
   console.error("❌ Deployment failed:", err);
-  process.exit(1);
+  process.exitCode = 1;
 });

@@ -1,0 +1,36 @@
+name: Deploy Canary & EscapeWallet to Sepolia
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔧 Compile contracts
+        run: npx hardhat compile
+
+      - name: 🔑 Set up ENV variables
+        run: |
+          echo "SEPOLIA_RPC_URL=${{ secrets.SEPOLIA_RPC_URL }}" >> .env
+          echo "PRIVATE_KEY=${{ secrets.PRIVATE_KEY }}" >> .env
+          echo "OWNER=${{ secrets.OWNER }}" >> .env
+          echo "ESCAPE_TO=${{ secrets.ESCAPE_TO }}" >> .env
+
+      - name: 🚀 Deploy Canary & EscapeWallet
+        run: npx hardhat run scripts/deployCanaryAndEscape.js --network sepolia
