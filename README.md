@@ -1,4 +1,6 @@
-## 📁 Project Structure
+## 🐤 Canary Wallet 
+
+[![](https://github.com/realCanaryWallet/canary-wallet/actions/workflows/deploy-sepolia.yml/badge.svg)](https://github.com/realCanaryWallet/canary-wallet/actions/workflows/deploy-sepolia.yml)
 
 ```
 canary-wallet/

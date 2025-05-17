@@ -1,4 +1,4 @@
-name: Deploy Canary & EscapeWallet to Sepolia
+name: Canary Wallet Deployment
 
 on:
   push:
@@ -9,7 +9,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production
 
     env:
       SEPOLIA_RPC_URL: ${{ secrets.SEPOLIA_RPC_URL }}
