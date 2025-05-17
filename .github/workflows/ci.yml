@@ -30,3 +30,10 @@ jobs:
 
       - name: 🧪 Run Hardhat tests
         run: npx hardhat test
+
+env:
+  SEPOLIA_RPC_URL: ${{ secrets.SEPOLIA_RPC_URL }}
+  PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+  OWNER: ${{ secrets.OWNER }}
+  ESCAPE_TO: ${{ secrets.ESCAPE_TO }}
+  CANARY: ${{ secrets.CANARY }}
