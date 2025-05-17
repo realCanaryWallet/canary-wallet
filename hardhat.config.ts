@@ -4,6 +4,9 @@ require("dotenv").config();
 
 const config: HardhatUserConfig = {
   solidity: "0.8.28",
+  paths: {
+    sources: "./contracts",
+  },
   networks: {
     sepolia: {
       url: process.env.SEPOLIA_RPC_URL,
