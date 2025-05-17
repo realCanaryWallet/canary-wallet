@@ -81,4 +81,28 @@ describe("Canary Wallet", function () {
       escapeWallet.connect(escapeTo).escape()
     ).to.be.revertedWith("Not authorized");
   });
+  
+  it("❌ should not allow non-owner to update canary", async () => {
+    await expect(
+      escapeWallet.connect(escapeTo).updateCanary(escapeTo.address)
+    ).to.be.revertedWith("Not authorized");
+  });
+
+  it("✅ should allow owner to update canary", async () => {
+    const oldCanary = await escapeWallet.canary();
+    await escapeWallet.connect(owner).updateCanary(escapeTo.address);
+    const newCanary = await escapeWallet.canary();
+    expect(newCanary).to.equal(escapeTo.address);
+    expect(newCanary).to.not.equal(oldCanary);
+  });
+
+  it("❌ should not allow escape twice", async () => {
+    await canarySignal.connect(canaryEOA).ping();
+    await time.increase(8 * 24 * 60 * 60);
+    await escapeWallet.connect(owner).escape();
+
+    await expect(
+      escapeWallet.connect(owner).escape()
+    ).to.be.revertedWith("Already escaped");
+  });
 });
