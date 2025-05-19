@@ -41,15 +41,26 @@ export default function CanaryWalletPage() {
 
         {/* Hero Section */}
         <section className="text-center py-20 px-6">
-          <h1 className="text-6xl font-bold mb-6 tracking-tight leading-tight">
-            A Canary That Saves ₿illions.
-          </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <div className="relative inline-block">
+            <h1 className="text-6xl font-bold mb-2 tracking-tight leading-tight">
+              A <span className="italic text-yellow-300">Canary</span> That Saves ₿illions.
+            </h1>
+            <div className="absolute right-0 bottom-[-1.5rem] text-lg italic text-gray-400">
+              <a
+                href="https://en.wiktionary.org/wiki/canary_in_a_coal_mine#English"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-yellow-200"
+              >
+                — canary in a coal mine
+              </a>
+            </div>
+          </div>
+
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto mt-10 leading-relaxed">
             Canary Wallet is an early warning system for smart wallets. When a ping
             fails to arrive, funds can escape to safety.
           </p>
-
-
         </section>
 
         {/* How It Works */}
@@ -113,7 +124,7 @@ export default function CanaryWalletPage() {
           </div>
         </section>
 
-        <footer className="text-center text-sm text-gray-500 py-6">
+        <footer className="text-center text-sm text-yellow-400 py-6">
           © {new Date().getFullYear()} Canary Wallet. All rights reserved.
         </footer>
       </main>
