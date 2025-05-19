@@ -2,10 +2,6 @@
 
 *Secure your wallet with Canary.*
 
-[![Deployment](https://github.com/realCanaryWallet/canary-wallet/actions/workflows/deploy-sepolia.yml/badge.svg)](https://github.com/realCanaryWallet/canary-wallet/actions/workflows/deploy-sepolia.yml)
-
-[![Unit Test](https://github.com/realCanaryWallet/canary-wallet/actions/workflows/unit-test.yaml/badge.svg)](https://github.com/realCanaryWallet/canary-wallet/actions/workflows/unit-test.yaml)
-
 ```
 canary-wallet/
 ├── contracts/
