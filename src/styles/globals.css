@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@font-face {
+  font-family: 'SF Pro Display';
+  src: local('SF Pro Display'), local('San Francisco'), system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
